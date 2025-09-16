@@ -142,10 +142,13 @@ animations = [{
 radius = 5.0
 height = 12.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_a3d8c")
 move_speed = 60.0
+push_strenght = 300.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_74mp2")
