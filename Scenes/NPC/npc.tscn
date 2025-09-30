@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://cvinevfnjymnv"]
+
+[ext_resource type="Texture2D" uid="uid://chy3j8y2wb81v" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaBlue2/SpriteSheet.png" id="1_3am0f"]
+[ext_resource type="Script" uid="uid://cq2gfqilssfp8" path="res://Scenes/NPC/npc.gd" id="1_bjna2"]
+[ext_resource type="Texture2D" uid="uid://tg386yene36p" path="res://Ninja Adventure - Asset Pack/Ui/Dialog/DialogBoxFaceset.png" id="3_0s07e"]
+[ext_resource type="Texture2D" uid="uid://cc5tpddpfaaiy" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaBlue2/Faceset.png" id="4_aqj1y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjna2"]
+atlas = ExtResource("1_3am0f")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0s07e"]
+size = Vector2(12, 12)
+
+[sub_resource type="LabelSettings" id="LabelSettings_n8r46"]
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_aqj1y"]
+font_size = 28
+
+[node name="NPC" type="StaticBody2D" groups=["interactable"]]
+process_mode = 3
+script = ExtResource("1_bjna2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_bjna2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_0s07e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="DialogueBoxTexture" type="TextureRect" parent="CanvasLayer"]
+offset_left = 16.0
+offset_top = 400.0
+offset_right = 316.0
+offset_bottom = 458.0
+scale = Vector2(3.7, 3.7)
+texture = ExtResource("3_0s07e")
+
+[node name="NPCIcon" type="TextureRect" parent="CanvasLayer/DialogueBoxTexture"]
+layout_mode = 0
+offset_left = 6.216216
+offset_top = 13.783783
+offset_right = 44.216217
+offset_bottom = 51.783783
+texture = ExtResource("4_aqj1y")
+
+[node name="DialogueLabel" type="Label" parent="CanvasLayer"]
+offset_left = 208.0
+offset_top = 448.0
+offset_right = 1103.0
+offset_bottom = 594.0
+text = "Hello, world!"
+label_settings = SubResource("LabelSettings_n8r46")
+autowrap_mode = 3
+
+[node name="NameLabel" type="Label" parent="CanvasLayer"]
+offset_left = 42.0
+offset_top = 401.0
+offset_right = 271.0
+offset_bottom = 440.0
+text = "Blue Ninja"
+label_settings = SubResource("LabelSettings_aqj1y")
+horizontal_alignment = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://dmipxksxnflyi"]
+[gd_scene load_steps=23 format=4 uid="uid://dmipxksxnflyi"]
 
 [ext_resource type="PackedScene" uid="uid://ckw1b7q6p1iry" path="res://Scenes/Player/player.tscn" id="1_2p8i2"]
 [ext_resource type="Texture2D" uid="uid://bbh7sro5kvi6v" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="1_l6yvh"]
@@ -7,7 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://dc3h5hkuy4g86" path="res://Scenes/SceneEntrance/scene_entrance.tscn" id="5_oi8ly"]
 [ext_resource type="PackedScene" uid="uid://diagj85kheko8" path="res://Scenes/Block/block.tscn" id="6_12ovb"]
 [ext_resource type="PackedScene" uid="uid://bo4f56x2dul01" path="res://Scenes/PuzzleButton/puzzle_button.tscn" id="6_ohrk8"]
+[ext_resource type="PackedScene" uid="uid://cvinevfnjymnv" path="res://Scenes/NPC/npc.tscn" id="7_nr542"]
+[ext_resource type="Texture2D" uid="uid://ccpewo874afi3" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaGreen/SpriteSheet.png" id="8_dc78n"]
 [ext_resource type="PackedScene" uid="uid://15tjgqkjbl4r" path="res://Scenes/LockedDoor/locked_door.tscn" id="8_elpgg"]
+[ext_resource type="Texture2D" uid="uid://bcdx7j22ueymb" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaGreen/Faceset.png" id="9_6qy3m"]
+[ext_resource type="Texture2D" uid="uid://juvki50snqbj" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaMageBlack/SpriteSheet.png" id="10_njm7v"]
+[ext_resource type="Texture2D" uid="uid://cuwnhewawac3u" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaMageBlack/Faceset.png" id="11_bkvnf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_04h35"]
 texture = ExtResource("1_l6yvh")
@@ -783,6 +788,14 @@ physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_12ovb")
 sources/0 = SubResource("TileSetAtlasSource_oi8ly")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_njm7v"]
+atlas = ExtResource("8_dc78n")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpdpv"]
+atlas = ExtResource("10_njm7v")
+region = Rect2(0, 0, 16, 16)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_elpgg"]
 size = Vector2(16, 48)
 
@@ -817,6 +830,41 @@ position = Vector2(1, 2)
 [node name="Camera2D" type="Camera2D" parent="ObstacleLayer/Player"]
 zoom = Vector2(5, 5)
 
+[node name="NPC" parent="ObstacleLayer" instance=ExtResource("7_nr542")]
+position = Vector2(-23, -30)
+
+[node name="NPC2" parent="ObstacleLayer" instance=ExtResource("7_nr542")]
+position = Vector2(-71, 10)
+dialogue_lines = Array[String](["Hey you!", "Did you know that there's a cava to east?", "But be careful! The evil Black Mage Ninja is wainting."])
+
+[node name="Sprite2D" parent="ObstacleLayer/NPC2" index="0"]
+texture = SubResource("AtlasTexture_njm7v")
+
+[node name="NPCIcon" parent="ObstacleLayer/NPC2/CanvasLayer/DialogueBoxTexture" index="0"]
+texture = ExtResource("9_6qy3m")
+
+[node name="DialogueLabel" parent="ObstacleLayer/NPC2/CanvasLayer" index="1"]
+text = "Hey, did you know that there's a cave in the east?"
+
+[node name="NameLabel" parent="ObstacleLayer/NPC2/CanvasLayer" index="2"]
+text = "Green Ninja"
+
+[node name="NPC3" parent="ObstacleLayer" instance=ExtResource("7_nr542")]
+position = Vector2(-215, -30)
+dialogue_lines = Array[String](["...", "Do you want to enter the cave?", "Solve the puzzle and you can enter.", "Muahahahahaha!a"])
+
+[node name="Sprite2D" parent="ObstacleLayer/NPC3" index="0"]
+texture = SubResource("AtlasTexture_rpdpv")
+
+[node name="NPCIcon" parent="ObstacleLayer/NPC3/CanvasLayer/DialogueBoxTexture" index="0"]
+texture = ExtResource("11_bkvnf")
+
+[node name="DialogueLabel" parent="ObstacleLayer/NPC3/CanvasLayer" index="1"]
+text = "Mwahahahahahahaha!"
+
+[node name="NameLabel" parent="ObstacleLayer/NPC3/CanvasLayer" index="2"]
+text = "Dark Mage Ninja"
+
 [node name="LockedDoor" parent="ObstacleLayer" instance=ExtResource("8_elpgg")]
 position = Vector2(-199, -54)
 
@@ -847,3 +895,6 @@ shape = SubResource("RectangleShape2D_nr542")
 
 [connection signal="body_entered" from="PuzzleButton" to="ObstacleLayer/LockedDoor" method="_on_puzzle_button_body_entered"]
 [connection signal="body_exited" from="PuzzleButton" to="ObstacleLayer/LockedDoor" method="_on_puzzle_button_body_exited"]
+
+[editable path="ObstacleLayer/NPC2"]
+[editable path="ObstacleLayer/NPC3"]
